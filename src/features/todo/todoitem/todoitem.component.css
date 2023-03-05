@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+}
+
+.item-label {
+  cursor: pointer;
+  min-width: 300px;
+}
+
+.item-label.done {
+  color: gray;
+  text-decoration: line-through;
+}
+
+.item-label.editable {
+  border: 1px solid gray;
+  cursor: text;
+}

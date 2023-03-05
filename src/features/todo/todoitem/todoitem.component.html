@@ -1,0 +1,25 @@
+<span
+  #itemLbl
+  class="item-label"
+  [class.done]="item.isDone"
+  [class.editable]="editable"
+  [attr.contenteditable]="editable"
+  (click)="editable = true"
+  >{{ item.label }}
+</span>
+<div class="field is-grouped">
+  <button *ngIf="editable" (click)="onEdit()" class="button is-ghost">
+    ✅
+  </button>
+  <div class="control">
+    <button
+      (click)="editable = false; toggle.emit(!item.isDone)"
+      class="button is-info"
+    >
+      {{ item.isDone ? 'Uncheck' : 'Done' }}
+    </button>
+  </div>
+  <button (click)="remove.emit(item.id)" class="button is-warning">
+    Remove
+  </button>
+</div>

@@ -1,0 +1,57 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <section class="section pt-0">
+    <ng-container *ngIf="!vm.isEmpty; else empty">
+      <div class="field has-addons">
+        <div class="control">
+          <label for="search" class="label">Search </label>
+          <input
+            type="text"
+            id="search"
+            class="input"
+            name="search"
+            placeholder="search"
+            (input)="onSearch($any($event.target).value)"
+          />
+        </div>
+      </div>
+      <h2 class="title is-2">Todo list</h2>
+      <app-todolist *ngIf="!vm.isEmptyFilter; else emptySearch"></app-todolist>
+    </ng-container>
+
+    <form
+      class="form mt-3"
+      #formAdd="ngForm"
+      (ngSubmit)="
+        todosService.addItem(formAdd.value.newitem); formAdd.resetForm()
+      "
+    >
+      <div class="field has-addons">
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            id="newitem"
+            name="newitem"
+            placeholder="add a todo task"
+            ngModel
+          />
+        </div>
+        <div class="control">
+          <button type="submit" class="button is-primary">Add</button>
+        </div>
+      </div>
+      <button
+        type="button"
+        (click)="todosService.clearAll()"
+        class="button is-danger"
+      >
+        Clear all
+      </button>
+    </form>
+  </section>
+
+  <ng-template #empty>
+    Congrats!. You have no todos! Start adding some.</ng-template
+  >
+  <ng-template #emptySearch> No items found.</ng-template>
+</ng-container>
